@@ -43,8 +43,7 @@ function updateIcons(theme) {
 
 // Gestionnaire d'événement pour le bouton de basculement de thème
 themeToggleButton.addEventListener("click", () => {
-  const newTheme = currentTheme === "light" ? "dark" : "light";
-  setTheme(newTheme);
+  setTheme(currentTheme === "light" ? "dark" : "light");
 });
 
 // Écouter les changements dans sync
