@@ -17,25 +17,18 @@ browser.storage.sync.get("theme").then((data) => {
   setTheme(currentTheme);
 });
 
-async function setTheme(theme) {
-  if (currentTheme === theme) {
-    console.log("Le thème est déjà défini à :", theme);
-    return; // Ne rien faire si le thème est déjà le même
-  }
-
-  try {
-    await browser.storage.sync.set({ theme: theme });
+const setTheme = (theme) => {
+  browser.storage.sync.set({ theme: theme }).then((data) => {
     console.log("Thème défini dans sync :", theme);
-  } catch (error) {
-    console.warn("Sync non disponible, utilisation du stockage local :", error);
-  }
-
-  await browser.storage.local.set({ theme: theme });
-  console.log("Thème défini dans local :", theme);
+  });
+  
+  browser.storage.local.set({ theme: theme }).then((data) => {
+    console.log("Thème défini dans local :", theme);
+  });
 
   document.documentElement.setAttribute("data-theme", theme);
   updateIcons(theme);
-  currentTheme = theme; // Mettre à jour la variable du thème actuel
+  currentTheme = theme;
 }
 
 function updateIcons(theme) {
