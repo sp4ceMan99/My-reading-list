@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "My reading list",
-  "version": "0.0.99",
+  "version": "1.0.4",
   "description": "With this extension, you can save pages quickly and read after, for me it's temporarily bookmarks.",
   "permissions": [
     "storage",
