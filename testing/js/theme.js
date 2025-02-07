@@ -57,3 +57,12 @@ themeToggleButton.addEventListener("click", async () => {
   const newTheme = currentTheme === "light" ? "dark" : "light";
   setTheme(newTheme);
 });
+
+// Écouter les changements dans sync
+browser.storage.onChanged.addListener((changes, area) => {
+  if (area === "sync" && changes.theme) {
+    const newTheme = changes.theme.newValue;
+    console.log("Thème changé dans sync :", newTheme);
+    setTheme(newTheme);
+  }
+});
