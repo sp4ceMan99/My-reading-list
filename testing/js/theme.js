@@ -4,23 +4,18 @@ const darkIcon = document.querySelector(".theme__dark");
 
 let currentTheme = "light"; // Variable pour stocker le thème actuel
 
-async function getTheme() {
-  try {
-    const syncData = await browser.storage.sync.get("theme");
-    if (syncData.theme) {
-      console.log("Thème récupéré depuis sync :", syncData.theme);
-      currentTheme = syncData.theme;
-      return syncData.theme;
-    }
-  } catch (error) {
-    console.warn("Sync non disponible, utilisation du stockage local :", error);
+browser.storage.sync.get("theme").then((data) => {
+  if(data.theme) {
+    console.log("Thème récupéré depuis sync :", data.theme);
+    currentTheme = data.theme;
+  } else {
+    browser.storage.local.get("theme").then((data) => {
+      console.log("Thème récupéré depuis le local storage :", localData.theme);
+      currentTheme = data.theme || "light";
+    });
   }
-
-  const localData = await browser.storage.local.get("theme");
-  console.log("Thème récupéré depuis local :", localData.theme);
-  currentTheme = localData.theme || "light";
-  return currentTheme;
-}
+  setTheme(currentTheme);
+});
 
 async function setTheme(theme) {
   if (currentTheme === theme) {
@@ -52,11 +47,6 @@ function updateIcons(theme) {
     darkIcon.style.display = "none";
   }
 }
-
-// Initialisation du thème au chargement de la page
-getTheme().then((theme) => {
-  setTheme(theme);
-});
 
 // Gestionnaire d'événement pour le bouton de basculement de thème
 themeToggleButton.addEventListener("click", () => {
