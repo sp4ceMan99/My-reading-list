@@ -2,14 +2,15 @@ const themeToggleButton = document.querySelector("#theme");
 const lightIcon = document.querySelector(".theme__light");
 const darkIcon = document.querySelector(".theme__dark");
 
+let currentTheme = "light"; // Variable pour stocker le thème actuel
+
 async function getTheme() {
   try {
     const syncData = await browser.storage.sync.get("theme");
     if (syncData.theme) {
       console.log("Thème récupéré depuis sync :", syncData.theme);
+      currentTheme = syncData.theme;
       return syncData.theme;
-    } else {
-      console.log("Aucun thème trouvé dans sync.");
     }
   } catch (error) {
     console.warn("Sync non disponible, utilisation du stockage local :", error);
@@ -17,10 +18,16 @@ async function getTheme() {
 
   const localData = await browser.storage.local.get("theme");
   console.log("Thème récupéré depuis local :", localData.theme);
-  return localData.theme || "light";
+  currentTheme = localData.theme || "light";
+  return currentTheme;
 }
 
 async function setTheme(theme) {
+  if (currentTheme === theme) {
+    console.log("Le thème est déjà défini à :", theme);
+    return; // Ne rien faire si le thème est déjà le même
+  }
+
   try {
     await browser.storage.sync.set({ theme: theme });
     console.log("Thème défini dans sync :", theme);
@@ -33,9 +40,9 @@ async function setTheme(theme) {
 
   document.documentElement.setAttribute("data-theme", theme);
   updateIcons(theme);
+  currentTheme = theme; // Mettre à jour la variable du thème actuel
 }
 
-// Fonction pour mettre à jour les icônes en fonction du thème
 function updateIcons(theme) {
   if (theme === "light") {
     lightIcon.style.display = "none";
@@ -52,8 +59,7 @@ getTheme().then((theme) => {
 });
 
 // Gestionnaire d'événement pour le bouton de basculement de thème
-themeToggleButton.addEventListener("click", async () => {
-  const currentTheme = await getTheme();
+themeToggleButton.addEventListener("click", () => {
   const newTheme = currentTheme === "light" ? "dark" : "light";
   setTheme(newTheme);
 });
@@ -62,7 +68,9 @@ themeToggleButton.addEventListener("click", async () => {
 browser.storage.onChanged.addListener((changes, area) => {
   if (area === "sync" && changes.theme) {
     const newTheme = changes.theme.newValue;
-    console.log("Thème changé dans sync :", newTheme);
-    setTheme(newTheme);
+    if (newTheme !== currentTheme) {
+      console.log("Thème changé dans sync :", newTheme);
+      setTheme(newTheme);
+    }
   }
 });
