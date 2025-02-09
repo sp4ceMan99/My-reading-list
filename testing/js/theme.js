@@ -2,7 +2,7 @@ const themeToggleButton = document.querySelector("#theme");
 const lightIcon = document.querySelector(".theme__light");
 const darkIcon = document.querySelector(".theme__dark");
 
-let currentTheme = "light"; // Variable pour stocker le thème actuel
+let currentTheme; // Variable pour stocker le thème actuel
 
 browser.storage.sync.get("theme").then((data) => {
   if(data.theme) {
