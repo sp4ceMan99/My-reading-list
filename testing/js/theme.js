@@ -2,7 +2,7 @@ const themeToggleButton = document.querySelector("#theme");
 const lightIcon = document.querySelector(".theme__light");
 const darkIcon = document.querySelector(".theme__dark");
 
-let currentTheme; // Variable pour stocker le thème actuel
+let currentTheme;
 
 browser.storage.sync.get("theme").then((data) => {
   if(data.theme) {
@@ -41,12 +41,10 @@ function updateIcons(theme) {
   }
 }
 
-// Gestionnaire d'événement pour le bouton de basculement de thème
 themeToggleButton.addEventListener("click", () => {
   setTheme(currentTheme === "light" ? "dark" : "light");
 });
 
-// Écouter les changements dans sync
 browser.storage.onChanged.addListener((changes, area) => {
   if (area === "sync" && changes.theme) {
     const newTheme = changes.theme.newValue;
