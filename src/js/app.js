@@ -4,31 +4,64 @@ document.addEventListener('DOMContentLoaded', function() {
   const addItem = document.querySelector('#add');
   const searchInput = document.querySelector('.search__input');
   const clearButton = document.querySelector('.search__clear');
+
+  let list = [];
   let currentSearchText = '';
 
   // Init : Get and add the datalist to the DOM
-  browser.storage.local.get('list').then(result => {
-    list = result.list || [];
+  browser.storage.sync.get("list").then((data) => {
+    if(data.list) {
+      console.log("Liste de lecture récupérée depuis sync :", data.list);
+      list = data.list
+      processList(list)
+    } else {
+      browser.storage.local.get("list").then((data) => {
+        console.log("Liste de lecture récupérée depuis le local storage :", data.list);
+        list = data.list;
+        processList(list)
+      });
+    }
+  });
+
+  function processList(list) {
     list.forEach((item) => {
       addItemToDom(item);
     });
-  });
+  }
 
-  // Save item to the list and storage
-  const saveItem = (item) => {
-    list.push(item);
-    browser.storage.local.set({ 'list': list });
+  const saveList = (list) => {
+    browser.storage.sync.set({ list: list }).then((data) => {
+      console.log("Liste de lecture définie dans sync :", list);
+    });
+    browser.storage.local.set({ list: list }).then((data) => {
+      console.log("Liste de lecture définie dans local :", list);
+    });
   }
 
   // Remove item to the list and save to the storage
   const removeItem = (item) => {
     list = list.filter(i => i.url !== item.url);
-    browser.storage.local.set({ 'list': list });
+    saveList(list);
   }
 
   const isUrlInList = (url) => {
     return list.some(item => item.url === url);
   }
+
+  browser.storage.onChanged.addListener((changes, area) => {
+    if (area === "sync" && changes.list) {
+      const newList = changes.list.newValue;
+      if (JSON.stringify(newList) !== JSON.stringify(list)) {
+        console.log("Liste de lecture changée dans sync :", newList);
+        list = newList;
+        browser.storage.local.set({ list: list }).then((data) => {
+          console.log("Liste de lecture définie dans local :", list);
+          clearList();
+          processList(list);
+        });
+      }
+    }
+  });
 
   // Function to create a element in the DOM
   function createElement(tagName, attributes = {}) {
@@ -136,10 +169,10 @@ document.addEventListener('DOMContentLoaded', function() {
         url: activeTab.url
       }
 
-      // Save the item to storage
-      saveItem(item);
+      list.push(item);
 
-      // Add the item to the DOM
+      saveList(list);
+
       addItemToDom(item);
 
       // Apply the filter if there is an active search text
@@ -151,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
-  // Deprecated but good
   const clearList = () => {
     while(app.firstChild) {
       app.removeChild(app.firstChild);
