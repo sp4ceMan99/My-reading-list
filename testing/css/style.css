@@ -233,6 +233,7 @@ header {
   border-radius: var(--border-radius);
   color: #000;
 }
+
 .aboutsync__gotit:hover {
   background-color: rgb(255, 255, 226);
 }
@@ -243,6 +244,7 @@ header {
   text-align: center;
   font-size: small;
 }
+
 .aboutsyncBTN:hover {
   color: rgb(239, 10, 56);
 }
