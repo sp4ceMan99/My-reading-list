@@ -209,3 +209,40 @@ header {
 #add:hover {
   background-color: #0f66d9;
 }
+
+.aboutsync {
+  background-color: crimson;
+  color: #fff;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  display: none;
+}
+
+.aboutsync p {
+  margin: 0;
+  padding: 0;
+}
+
+.aboutsync__gotit {
+  background-color: yellow;
+  display: block;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  margin-top: 12px;
+  border-radius: var(--border-radius);
+  color: #000;
+}
+.aboutsync__gotit:hover {
+  background-color: rgb(255, 255, 226);
+}
+
+.aboutsyncBTN {
+  text-decoration: none;
+  color: crimson;
+  text-align: center;
+  font-size: small;
+}
+.aboutsyncBTN:hover {
+  color: rgb(239, 10, 56);
+}

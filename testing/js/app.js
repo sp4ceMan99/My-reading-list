@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const addItem = document.querySelector('#add');
   const searchInput = document.querySelector('.search__input');
   const clearButton = document.querySelector('.search__clear');
+
   let list = [];
   let currentSearchText = '';
 
@@ -170,10 +171,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       list.push(item);
 
-      // Save the item to storage
       saveList(list);
 
-      // Add the item to the DOM
       addItemToDom(item);
 
       // Apply the filter if there is an active search text
@@ -185,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
-  // Deprecated but good
   const clearList = () => {
     while(app.firstChild) {
       app.removeChild(app.firstChild);
