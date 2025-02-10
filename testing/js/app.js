@@ -52,10 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const newList = changes.list.newValue;
       if (JSON.stringify(newList) !== JSON.stringify(list)) {
         console.log("Liste de lecture changée dans sync :", newList);
-        list = newList
-        clearList();
-        processList(list);
-        saveList(list);
+        list = newList;
+        browser.storage.local.set({ list: list }).then((data) => {
+          console.log("Liste de lecture définie dans local :", list);
+          clearList();
+          processList(list);
+        });
       }
     }
   });
