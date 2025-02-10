@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         list = newList
         clearList();
         processList(list);
+        saveList(list);
       }
     }
   });
