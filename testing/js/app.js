@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const addItem = document.querySelector('#add');
   const searchInput = document.querySelector('.search__input');
   const clearButton = document.querySelector('.search__clear');
+  let list = [];
   let currentSearchText = '';
 
   // Init : Get and add the datalist to the DOM
   browser.storage.sync.get("list").then((data) => {
-    let list = []
     if(data.list) {
       console.log("Liste de lecture récupérée depuis sync :", data.list);
       list = data.list
