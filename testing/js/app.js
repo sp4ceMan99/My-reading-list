@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const newList = changes.list.newValue;
       if (JSON.stringify(newList) !== JSON.stringify(list)) {
         console.log("Liste de lecture changée dans sync :", newList);
-        saveList(list);
+        clearList();
+        processList(list);
       }
     }
   });
