@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
-sdfggggsfdsdfdsfdsfsdf
+
   // Function to create a element in the DOM
   function createElement(tagName, attributes = {}) {
     const element = document.createElement(tagName)
