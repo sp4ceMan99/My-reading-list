@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "My reading list",
   "version": "1.0.7",
-  "description": "With this extension, you can save pages quickly and read after, for me it's temporarily bookmarks.",
+  "description": "You can save pages quickly and read after, sync with Firefox account.",
   "permissions": [
     "storage",
     "tabs"
