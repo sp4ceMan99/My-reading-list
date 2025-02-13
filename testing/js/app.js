@@ -6,18 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const clearButton = document.querySelector('.search__clear');
 
   let list = [];
-  
+
   let currentSearchText = '';
 
   // Init : Get and add the datalist to the DOM
   browser.storage.sync.get("list").then((data) => {
     if(data.list) {
-      console.log("Liste de lecture récupérée depuis sync :", data.list);
+      console.log("List retrieved from sync :", data.list);
       list = data.list
       processList(list)
     } else {
       browser.storage.local.get("list").then((data) => {
-        console.log("Liste de lecture récupérée depuis le local storage :", data.list);
+        console.log("List retrieved from local storage :", data.list);
         list = data.list;
         processList(list)
       });
@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const saveList = (list) => {
     browser.storage.sync.set({ list: list }).then((data) => {
-      console.log("Liste de lecture définie dans sync :", list);
+      console.log("List set in sync :", list);
     });
     browser.storage.local.set({ list: list }).then((data) => {
-      console.log("Liste de lecture définie dans local :", list);
+      console.log("List set in local storage :", list);
     });
   }
 
@@ -53,10 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (area === "sync" && changes.list) {
       const newList = changes.list.newValue;
       if (JSON.stringify(newList) !== JSON.stringify(list)) {
-        console.log("Liste de lecture changée dans sync :", newList);
+        console.log("List changed in sync :", newList);
         list = newList;
         browser.storage.local.set({ list: list }).then((data) => {
-          console.log("Liste de lecture définie dans local :", list);
+          console.log("List set in local storage :", list);
           clearList();
           processList(list);
         });
