@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const clearButton = document.querySelector('.search__clear');
 
   let list = [];
-
   let currentSearchText = '';
 
   // Init : Get and add the datalist to the DOM
