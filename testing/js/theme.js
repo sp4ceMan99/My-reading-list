@@ -33,13 +33,8 @@ const setTheme = (theme) => {
 }
 
 function updateIcons(theme) {
-  if (theme === "light") {
-    lightIcon.style.display = "none";
-    darkIcon.style.display = "block";
-  } else {
-    lightIcon.style.display = "block";
-    darkIcon.style.display = "none";
-  }
+  lightIcon.style.display = theme === "light" ? "none" : "block";
+  darkIcon.style.display = theme === "light" ? "block" : "none";
 }
 
 themeToggleButton.addEventListener("click", () => {
