@@ -195,16 +195,9 @@ document.addEventListener('DOMContentLoaded', function() {
     currentSearchText = searchText.toLowerCase();
   
     list.forEach(item => {
-
       const element = document.getElementById(item.date);
       const result = item.title.toLowerCase().includes(currentSearchText) || item.url.toLowerCase().includes(currentSearchText);
-      
-      if(result) {
-        element.style.display = 'flex';
-      } else {
-        element.style.display = 'none';
-      }
-
+      element.style.display = result ? "flex" : "none";
     });
     
   };
