@@ -134,8 +134,8 @@ document.addEventListener('DOMContentLoaded', function() {
     deleteButton.addEventListener('click', function() {
 
       if (deleteButton.textContent === 'Confirm') {
-        li.remove(); // Supprimer du DOM
-        removeItem(item); //Supprimer du Storage
+        li.remove();
+        removeItem(item);
       } else {
         deleteButton.textContent = 'Confirm';
         deleteButton.classList.add('confirmDelete');
