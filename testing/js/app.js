@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Remove item to the list and save to the storage
   const removeItem = (item) => {
     list = list.filter(i => i.url !== item.url);
     saveList(list);
@@ -152,9 +151,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   addItem.addEventListener('click', function() {
+    
     browser.tabs.query({ active: true, currentWindow: true }).then(tabs => {
       const activeTab = tabs[0];
-
       if(isUrlInList(activeTab.url)) {
         removeItem(activeTab);
         document.querySelectorAll('.link-item').forEach(item => {
@@ -171,9 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       list.push(item);
-
       saveList(list);
-
       addItemToDom(item);
 
       // Apply the filter if there is an active search text
@@ -192,15 +189,12 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   const filterItems = (searchText = "") => {
-
     currentSearchText = searchText.toLowerCase();
-  
     list.forEach(item => {
       const element = document.getElementById(item.date);
       const result = item.title.toLowerCase().includes(currentSearchText) || item.url.toLowerCase().includes(currentSearchText);
       element.style.display = result ? "flex" : "none";
     });
-    
   };
 
   searchInput.addEventListener('input', function() {
