@@ -5,15 +5,18 @@ const darkIcon = document.querySelector(".theme__dark");
 let currentTheme;
 
 browser.storage.sync.get("theme").then((data) => {
-    console.log("Thème récupéré depuis sync :", data.theme);
+    console.log("Theme retrieved from sync :", data.theme);
     currentTheme = data.theme || "light";
     setTheme(currentTheme);
 });
 
-const setTheme = (theme) => {
+const saveTheme = (theme) => {
   browser.storage.sync.set({ theme: theme }).then((data) => {
-    console.log("Thème défini dans sync :", theme);
+    console.log("Theme set in sync :", theme);
   });
+}
+
+const setTheme = (theme) => {
   document.documentElement.setAttribute("data-theme", theme);
   updateIcons(theme);
   currentTheme = theme;
@@ -26,13 +29,14 @@ function updateIcons(theme) {
 
 themeToggleButton.addEventListener("click", () => {
   setTheme(currentTheme === "light" ? "dark" : "light");
+  saveTheme(currentTheme);
 });
 
 browser.storage.onChanged.addListener((changes, area) => {
   if (area === "sync" && changes.theme) {
     const newTheme = changes.theme.newValue;
     if (newTheme !== currentTheme) {
-      console.log("Thème changé dans sync :", newTheme);
+      console.log("Theme changed in sync :", newTheme);
       setTheme(newTheme);
     }
   }
