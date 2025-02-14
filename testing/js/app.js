@@ -10,17 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Init : Get and add the datalist to the DOM
   browser.storage.sync.get("list").then((data) => {
-    if(data.list) {
       console.log("List retrieved from sync :", data.list);
-      list = data.list
+      list = data.list || [];
       processList(list)
-    } else {
-      browser.storage.local.get("list").then((data) => {
-        console.log("List retrieved from local storage :", data.list);
-        list = data.list || [];
-        processList(list)
-      });
-    }
   });
 
   function processList(list) {
@@ -32,9 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const saveList = (list) => {
     browser.storage.sync.set({ list: list }).then((data) => {
       console.log("List set in sync :", list);
-    });
-    browser.storage.local.set({ list: list }).then((data) => {
-      console.log("List set in local storage :", list);
     });
   }
 
@@ -53,11 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
       if (JSON.stringify(newList) !== JSON.stringify(list)) {
         console.log("List changed in sync :", newList);
         list = newList;
-        browser.storage.local.set({ list: list }).then((data) => {
-          console.log("List set in local storage :", list);
-          clearList();
-          processList(list);
-        });
+        clearList();
+        processList(list);
       }
     }
   });

@@ -5,25 +5,14 @@ const darkIcon = document.querySelector(".theme__dark");
 let currentTheme;
 
 browser.storage.sync.get("theme").then((data) => {
-  if(data.theme) {
     console.log("Thème récupéré depuis sync :", data.theme);
-    currentTheme = data.theme;
+    currentTheme = data.theme || "light";
     setTheme(currentTheme);
-  } else {
-    browser.storage.local.get("theme").then((data) => {
-      console.log("Thème récupéré depuis le local storage :", data.theme);
-      currentTheme = data.theme || "light";
-      setTheme(currentTheme);
-    });
-  }
 });
 
 const setTheme = (theme) => {
   browser.storage.sync.set({ theme: theme }).then((data) => {
     console.log("Thème défini dans sync :", theme);
-  });
-  browser.storage.local.set({ theme: theme }).then((data) => {
-    console.log("Thème défini dans local :", theme);
   });
   document.documentElement.setAttribute("data-theme", theme);
   updateIcons(theme);
