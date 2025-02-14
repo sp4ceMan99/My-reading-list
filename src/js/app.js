@@ -12,14 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
   browser.storage.sync.get("list").then((data) => {
       console.log("List retrieved from sync :", data.list);
       list = data.list || [];
-      processList(list)
+      list.forEach((item) => {
+        addItemToDom(item);
+      });
   });
-
-  function processList(list) {
-    list.forEach((item) => {
-      addItemToDom(item);
-    });
-  }
 
   const saveList = (list) => {
     browser.storage.sync.set({ list: list }).then((data) => {
@@ -43,7 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("List changed in sync :", newList);
         list = newList;
         clearList();
-        processList(list);
+        list.forEach((item) => {
+          addItemToDom(item);
+        });
       }
     }
   });
