@@ -22,11 +22,9 @@ const setTheme = (theme) => {
   browser.storage.sync.set({ theme: theme }).then((data) => {
     console.log("Thème défini dans sync :", theme);
   });
-  
   browser.storage.local.set({ theme: theme }).then((data) => {
     console.log("Thème défini dans local :", theme);
   });
-
   document.documentElement.setAttribute("data-theme", theme);
   updateIcons(theme);
   currentTheme = theme;
