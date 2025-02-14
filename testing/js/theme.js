@@ -11,7 +11,7 @@ browser.storage.sync.get("theme").then((data) => {
     setTheme(currentTheme);
   } else {
     browser.storage.local.get("theme").then((data) => {
-      console.log("Thème récupéré depuis le local storage :", localData.theme);
+      console.log("Thème récupéré depuis le local storage :", data.theme);
       currentTheme = data.theme || "light";
       setTheme(currentTheme);
     });

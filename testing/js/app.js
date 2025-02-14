@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       browser.storage.local.get("list").then((data) => {
         console.log("List retrieved from local storage :", data.list);
-        list = data.list;
+        list = data.list || [];
         processList(list)
       });
     }
