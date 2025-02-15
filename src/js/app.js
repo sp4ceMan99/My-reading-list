@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Init : Get and add the datalist to the DOM
   browser.storage.sync.get("list").then((data) => {
-      console.log("List retrieved from sync :", data.list);
-      list = data.list || [];
-      list.forEach((item) => {
-        addItemToDom(item);
-      });
+    console.log("List retrieved from sync :", data.list);
+    list = data.list || [];
+    list.forEach((item) => {
+      addItemToDom(item);
+    });
   });
 
   const saveList = (list) => {
