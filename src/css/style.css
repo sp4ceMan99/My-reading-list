@@ -1,7 +1,7 @@
 :root[data-theme="dark"] {
   --primary-color: #000000;
   --secondary-color: #313131;
-  --secondary-color-hover: #4d4d4d;
+  --secondary-color-hover: #3e3e3e;
   --text-color: #e1e1e1;
   --list-background-color: var(--secondary-color);
   --list-background-color-hover: #0a4ea4;
@@ -53,16 +53,31 @@ header {
 
 .search {
   position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+.search__icon {
+  position: absolute;
+  background-color: #0a4ea4;
+  color: white;
+  height: 44px;
+  width: 44px;
+  align-content: center;
+  text-align: center;
+}
+
+.search__icon svg {
+  position: relative;
+  top: 2px;
 }
 
 .search__input {
-  padding: 14px;
+  padding: 14px 55px 14px 55px;
   background-color: var(--secondary-color);
   border: 0;
-  border-radius: var(--border-radius);
   color: var(--text-color);
   width: 100%;
-  padding-right: 65px;
 }
 
 .search__input:focus {
