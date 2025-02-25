@@ -267,10 +267,12 @@ header {
 }
 
 .aboutsyncBTN {
-  text-decoration: none;
   color: crimson;
   text-align: center;
   font-size: small;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .aboutsyncBTN:hover {
