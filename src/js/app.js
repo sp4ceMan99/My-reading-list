@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     li.appendChild(link);
 
     const deleteButton = createElement("button", {
-      class: "btn delete",
+      class: "delete",
     })
 
     deleteButton.textContent = 'Delete';
@@ -114,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     deleteButton.addEventListener('click', function() {
-
       if (deleteButton.textContent === 'Confirm') {
         li.remove();
         removeItem(item);
@@ -126,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
           deleteButton.classList.remove('confirmDelete');
         }, 4000);
       }
-
     });
 
     app.insertBefore(li, app.firstChild);

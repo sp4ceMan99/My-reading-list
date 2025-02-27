@@ -5,9 +5,9 @@ const darkIcon = document.querySelector(".theme__dark");
 let currentTheme;
 
 browser.storage.sync.get("theme").then((data) => {
-    console.log("Theme retrieved from sync :", data.theme);
-    currentTheme = data.theme || "light";
-    setTheme(currentTheme);
+  console.log("Theme retrieved from sync :", data.theme);
+  currentTheme = data.theme || "light";
+  setTheme(currentTheme);
 });
 
 function setTheme(theme) {
