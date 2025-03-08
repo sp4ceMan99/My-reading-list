@@ -1,7 +1,7 @@
 :root[data-theme="dark"] {
   --primary-color: #000000;
-  --secondary-color: #313131;
-  --secondary-color-hover: #3e3e3e;
+  --secondary-color: #171717;
+  --secondary-color-hover: #313131;
   --text-color: #e1e1e1;
   --list-background-color: var(--secondary-color);
   --list-background-color-hover: #0a4ea4;
@@ -148,7 +148,7 @@ header {
 
 #app li:hover {
   background-color: var(--list-background-color-hover)!important;
-  transition: background-color 0.15s ease;
+  /* transition: background-color 0.15s ease; */
 }
 
 #app li:last-child {
