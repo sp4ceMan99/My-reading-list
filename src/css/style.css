@@ -1,6 +1,6 @@
 :root[data-theme="dark"] {
   --primary-color: #000000;
-  --secondary-color: #171717;
+  --secondary-color: #222;
   --secondary-color-hover: #313131;
   --text-color: #e1e1e1;
   --list-background-color: var(--secondary-color);
