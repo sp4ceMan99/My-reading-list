@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Function to create a element in the DOM
+  // Function to create an element in the DOM
   function createElement(tagName, attributes = {}) {
     const element = document.createElement(tagName)
     for (const attribute in attributes) {
