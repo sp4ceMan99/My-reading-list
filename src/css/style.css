@@ -2,13 +2,15 @@
   --primary-color: #222;
   --secondary-color: #373737;
   --secondary-color-hover: #4d4d4d;
-  --third-color: crimson;
+  --third-color: #bd1436;
   --third-color-hover: rgb(236, 14, 59);
   --text-color: #ffffff;
+  --text-color-reverse: #000;
   --list-background-color: var(--secondary-color);
-  --list-background-color-hover: #5f5f5f;
+  --list-background-color-hover: var(--third-color);
   --btn-delete-background-color: rgba(255, 255, 255, 0.2);
   --btn-delete-background-color-hover: rgba(255, 255, 255, 0.3);
+  --confirmDelete: #fff;
   --background-pattern: url(../images/pattern_white.png);
 }
 
@@ -19,10 +21,12 @@
   --third-color: black;
   --third-color-hover: #0067de;
   --text-color: #000;
+  --text-color-reverse: #fff;
   --list-background-color: var(--secondary-color);
   --list-background-color-hover: #ffe494;
   --btn-delete-background-color: rgba(255,255,255,.8);
   --btn-delete-background-color-hover: rgba(255,255,255,1);
+  --confirmDelete: #c6225b;
   --background-pattern: url(../images/pattern_black.png);
 }
 
@@ -219,8 +223,8 @@ header {
 }
 
 .confirmDelete, .confirmDelete:hover {
-  background-color: #c6225b;
-  color: #fff;
+  background-color: var(--confirmDelete);
+  color: var(--text-color-reverse);
 }
 
 #add {
