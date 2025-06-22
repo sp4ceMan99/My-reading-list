@@ -1,10 +1,12 @@
 :root[data-theme="dark"] {
-  --primary-color: #000000;
-  --secondary-color: #222;
-  --secondary-color-hover: #313131;
-  --text-color: #e1e1e1;
+  --primary-color: #222;
+  --secondary-color: #373737;
+  --secondary-color-hover: #4d4d4d;
+  --third-color: crimson;
+  --third-color-hover: rgb(236, 14, 59);
+  --text-color: #ffffff;
   --list-background-color: var(--secondary-color);
-  --list-background-color-hover: #0a4ea4;
+  --list-background-color-hover: #5f5f5f;
   --btn-delete-background-color: rgba(255, 255, 255, 0.2);
   --btn-delete-background-color-hover: rgba(255, 255, 255, 0.3);
   --background-pattern: url(../images/pattern_white.png);
@@ -14,6 +16,8 @@
   --primary-color: #fff;
   --secondary-color: #e5e5e5;
   --secondary-color-hover: #cccccc;
+  --third-color: black;
+  --third-color-hover: #0067de;
   --text-color: #000;
   --list-background-color: var(--secondary-color);
   --list-background-color-hover: #ffe494;
@@ -59,7 +63,7 @@ header {
 
 .search__icon {
   position: absolute;
-  background-color: #0a4ea4;
+  background-color: var(--third-color);
   color: white;
   height: 44px;
   width: 44px;
@@ -220,7 +224,7 @@ header {
 }
 
 #add {
-  background-color: #0a4ea4;
+  background-color: var(--third-color);
   color: #ffffff;
   cursor: pointer;
   padding: 15px 15px;
@@ -232,10 +236,11 @@ header {
   flex: 1;
   background-image: url(../images/pattern_white.png);
   background-repeat: repeat-x;
+  
 }
 
 #add:hover {
-  background-color: #0f66d9;
+  background-color: var(--third-color-hover);
 }
 
 .aboutsync {
