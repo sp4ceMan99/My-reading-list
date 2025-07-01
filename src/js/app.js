@@ -3,14 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const app = document.querySelector('#app');
   const addItem = document.querySelector('#add');
   const searchInput = document.querySelector('.search__input');
-  const clearButton = document.querySelector('.search__clear');
+  const clearSearchButton = document.querySelector('.search__clear');
 
   let list = [];
   let currentSearchText = '';
 
-  // Init : Get and add the datalist to the DOM
   browser.storage.sync.get("list").then((data) => {
-    console.log("List retrieved from sync :", data.list);
     list = data.list || [];
     list.forEach((item) => {
       addItemToDom(item);
@@ -33,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   browser.storage.onChanged.addListener((changes, area) => {
-    if (area === "sync" && changes.list) {
+    if(area === "sync" && changes.list) {
       const newList = changes.list.newValue;
       if (JSON.stringify(newList) !== JSON.stringify(list)) {
         console.log("List changed in sync :", newList);
@@ -179,14 +177,14 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   searchInput.addEventListener('input', function() {
-    clearButton.style.display = this.value ? "block" : "none";
+    clearSearchButton.style.display = this.value ? "block" : "none";
     filterItems(this.value);
   });
 
-  clearButton.addEventListener('click', function() {
+  clearSearchButton.addEventListener('click', function() {
     searchInput.value = '';
     searchInput.focus();
-    clearButton.style.display = "none";
+    clearSearchButton.style.display = "none";
     filterItems();
   });
 
