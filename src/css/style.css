@@ -2,15 +2,15 @@
   --primary-color: #222;
   --secondary-color: #373737;
   --secondary-color-hover: #4d4d4d;
-  --third-color: #bd1436;
-  --third-color-hover: rgb(236, 14, 59);
+  --third-color: #5a4cb2;
+  --third-color-hover: #6758cc;
   --text-color: #ffffff;
   --text-color-reverse: #000;
   --list-background-color: var(--secondary-color);
   --list-background-color-hover: var(--third-color);
   --btn-delete-background-color: rgba(255, 255, 255, 0.2);
   --btn-delete-background-color-hover: rgba(255, 255, 255, 0.3);
-  --confirmDelete: #fff;
+  --confirmDelete: #c6225b;
   --background-pattern: url(../images/pattern_white.png);
 }
 
@@ -224,7 +224,7 @@ header {
 
 .confirmDelete, .confirmDelete:hover {
   background-color: var(--confirmDelete);
-  color: var(--text-color-reverse);
+  color: #fff;
 }
 
 #add {
