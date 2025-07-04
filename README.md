@@ -1,5 +1,5 @@
 Extension **"My reading list"** for **Mozilla Firefox**  
-You can save pages **quickly** and **read after**, sync with **Firefox account** !
+**Quickly save pages** to the **Firefox sidebar**, **sync** with your **Firefox account** — **or not**.
 
 <img src="screenshots/readingList_white.png" width="325"> <img src="screenshots/readingList_black.png" width="325">
 
