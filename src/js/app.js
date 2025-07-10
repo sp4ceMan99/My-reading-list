@@ -15,21 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  const saveList = (list) => {
-    browser.storage.sync.set({ list: list }).then((data) => {
-      console.log("List set in sync :", list);
-    });
-  }
-
-  const removeItem = (item) => {
-    list = list.filter(i => i.url !== item.url);
-    saveList(list);
-  }
-
-  const isUrlInList = (url) => {
-    return list.some(item => item.url === url);
-  }
-
   browser.storage.onChanged.addListener((changes, area) => {
     if(area === "sync" && changes.list) {
       const newList = changes.list.newValue;
@@ -44,7 +29,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Function to create an element in the DOM
+  function saveList(list) {
+    browser.storage.sync.set({ list: list }).then((data) => {
+      console.log("List set in sync :", list);
+    });
+  }
+
+  function removeItem(item) {
+    list = list.filter(i => i.url !== item.url);
+    saveList(list);
+  }
+
+  function isUrlInList(url) {
+    return list.some(item => item.url === url);
+  }
+
   function createElement(tagName, attributes = {}) {
     const element = document.createElement(tagName)
     for (const attribute in attributes) {
@@ -129,6 +128,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   }
 
+  function clearList() {
+    while(app.firstChild) {
+      app.removeChild(app.firstChild);
+    }
+  }
+
+  function filterItems(searchText = "") {
+    currentSearchText = searchText.toLowerCase();
+    list.forEach(item => {
+      const element = document.getElementById(item.date);
+      const result = item.title.toLowerCase().includes(currentSearchText) || item.url.toLowerCase().includes(currentSearchText);
+      element.style.display = result ? "flex" : "none";
+    });
+  };
+
   addItem.addEventListener('click', function() {
     
     browser.tabs.query({ active: true, currentWindow: true }).then(tabs => {
@@ -160,21 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
   });
-
-  const clearList = () => {
-    while(app.firstChild) {
-      app.removeChild(app.firstChild);
-    }
-  }
-
-  const filterItems = (searchText = "") => {
-    currentSearchText = searchText.toLowerCase();
-    list.forEach(item => {
-      const element = document.getElementById(item.date);
-      const result = item.title.toLowerCase().includes(currentSearchText) || item.url.toLowerCase().includes(currentSearchText);
-      element.style.display = result ? "flex" : "none";
-    });
-  };
 
   searchInput.addEventListener('input', function() {
     clearSearchButton.style.display = this.value ? "block" : "none";
