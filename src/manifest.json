@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "My reading list",
   "version": "1.2.2",
-  "description": "You can save pages quickly and read after, sync with Firefox account.",
+  "description": "Quickly save pages to the Firefox sidebar, sync with your Firefox account — or not",
   "permissions": [
     "storage",
     "tabs"
